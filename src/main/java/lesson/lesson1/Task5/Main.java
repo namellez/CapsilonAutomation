@@ -1,9 +1,10 @@
-package lesson.lesson1;
+package lesson.lesson1.Task5;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.printf("Hello World");
+
+        Task5.guessTheName();
     }
 
 }
