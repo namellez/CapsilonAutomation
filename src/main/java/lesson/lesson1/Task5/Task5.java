@@ -24,12 +24,12 @@ public class Task5 {
             System.out.println("Enter a single letter or a whole word: ");
 
 
-            if (scan.hasNextInt() || scan.hasNextDouble()) {          //check to see if input is a number
+            String str = scan.nextLine();
+
+            if (!str.matches("[a-zA-Z]+")){          //check to see if input is a letter
                 System.out.println("You didn't enter a letter or a word. Try again!");
                 continue;
             }
-
-            String str = scan.nextLine();
 
             if (attempts.contains(str)) {        //check if the letters have already been used before
                 System.out.println("This letter / word has already been used! Try again!");
