@@ -1,0 +1,7 @@
+Regional_Plane, T-601, 1255, 1200, 1100
+Heavy_Plane, T-500, 1150, 1000, 1000
+Regional_Plane, T-600, 1255, 1200, 1100
+Private_Plane, Boeing-737, 725, 500, 2000
+Heavy_Plane, Boeing-939, 500, 400, 3000
+Regional_Plane, Concord, 350, 50, 800
+Private_Plane, Jetline, 200, 50, 1200
