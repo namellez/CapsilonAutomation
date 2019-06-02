@@ -1,7 +1,6 @@
 package lesson.lesson2.Task1;
 
 import lesson.lesson2.Task1.Entity.Plane;
-import lesson.lesson2.Task1.Logic.Controller;
 import lesson.lesson2.Task1.Logic.PlaneFactory;
 
 import java.util.ArrayList;
