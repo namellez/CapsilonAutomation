@@ -1,4 +1,4 @@
-package lesson.lesson2.Task1;
+package lesson.lesson2.Task1.Entity;
 
 public class PrivatePlane extends Plane {
 

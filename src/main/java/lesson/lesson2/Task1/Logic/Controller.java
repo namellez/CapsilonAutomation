@@ -1,4 +1,7 @@
-package lesson.lesson2.Task1;
+package lesson.lesson2.Task1.Logic;
+
+import lesson.lesson2.Task1.Entity.Plane;
+import lesson.lesson2.Task1.Utility.RangeComparator;
 
 import java.util.Collections;
 import java.util.List;
