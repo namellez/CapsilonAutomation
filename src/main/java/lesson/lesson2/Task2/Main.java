@@ -19,13 +19,13 @@ public class Main {
         studentsList.add(new Student("Stas", 20, "st09"));
         studentsList.add(new Student("Roman", 21, "st10"));
 
-        Controller controller = new Controller();
+        Controller c = new Controller();
 
-        controller.printList(controller.getStudentsByFirstLetters(studentsList));
+        c.printList(c.getStudentsByFirstLetters(studentsList));
 
-        controller.printList(controller.sortStudentsByAge(studentsList));
+        c.printList(c.sortStudentsByAge(studentsList));
 
-        controller.printMap(controller.getStudentsFromMapById(controller.convertListIntoMap(studentsList)));
+        c.printMap(c.getStudentsFromMapById(c.convertListIntoMap(studentsList)));
 
     }
 }

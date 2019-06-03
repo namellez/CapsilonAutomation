@@ -1,4 +1,4 @@
-package lesson.lesson2.Task1.Utility;
+package lesson.lesson2.Task1.utility;
 
 public enum PlaneType {
 
