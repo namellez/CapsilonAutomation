@@ -1,6 +1,6 @@
-package lesson.lesson2.Task1.Utility;
+package lesson.lesson2.Task1.utility;
 
-import lesson.lesson2.Task1.Entity.Plane;
+import lesson.lesson2.Task1.entity.Plane;
 
 import java.util.Comparator;
 

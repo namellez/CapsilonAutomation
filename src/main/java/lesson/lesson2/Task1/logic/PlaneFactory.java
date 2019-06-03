@@ -1,10 +1,10 @@
-package lesson.lesson2.Task1.Logic;
+package lesson.lesson2.Task1.logic;
 
-import lesson.lesson2.Task1.Entity.HeavyPlane;
-import lesson.lesson2.Task1.Entity.Plane;
-import lesson.lesson2.Task1.Entity.PrivatePlane;
-import lesson.lesson2.Task1.Entity.RegionalPlane;
-import lesson.lesson2.Task1.Utility.PlaneType;
+import lesson.lesson2.Task1.entity.HeavyPlane;
+import lesson.lesson2.Task1.entity.Plane;
+import lesson.lesson2.Task1.entity.PrivatePlane;
+import lesson.lesson2.Task1.entity.RegionalPlane;
+import lesson.lesson2.Task1.utility.PlaneType;
 
 import java.io.File;
 import java.io.FileNotFoundException;

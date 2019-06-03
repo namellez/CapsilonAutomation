@@ -41,16 +41,16 @@ class Controller {
 
     Map convertListIntoMap(List<Student> studentsList) {
 
-        Map<String, String> studentMap = new TreeMap<String, String>();
+        Map<String, Student> studentMap = new TreeMap<>();
         for (Student st : studentsList
         ) {
-            studentMap.put(st.getId(), st.getName());
+            studentMap.put(st.getId(), st);
         }
 
         return studentMap;
     }
 
-    Map<String, String> getStudentsFromMapById(Map<String, String> studentMap) {
+    Map<String, Student> getStudentsFromMapById(Map<String, Student> studentMap) {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Input student's id (full or part): ");
@@ -74,7 +74,7 @@ class Controller {
     }
 
 
-    void printMap (Map<String, String> studentsMap){
+    void printMap (Map<String, Student> studentsMap){
 
         if (studentsMap.size() == 0){
             System.out.println("There are no students to print");
