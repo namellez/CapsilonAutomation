@@ -5,3 +5,9 @@ Private_Plane, Boeing-737, 725, 500, 2000
 Heavy_Plane, Boeing-939, 500, 400, 3000
 Regional_Plane, Concord, 350, 50, 800
 Private_Plane, Jetline, 200, 50, 1200
+
+will not be parsed:
+Plane, Boeing-939, 500, 400, 3000
+Regional_Plane, 350, 50, 800
+Private_Plane, Jetline, 200 50, 1200
+sdfsdf
