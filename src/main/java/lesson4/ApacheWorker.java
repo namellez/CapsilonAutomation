@@ -16,18 +16,22 @@ import java.net.CookieManager;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.apache.http.HttpHeaders.USER_AGENT;
 
-public class HTTPComponents {
+public class ApacheWorker {
 
-    public void getListOfRepoUsers() throws Exception{
+    public static void getListOfRepoUsers() throws Exception{
 
-        String owner = "namellez";
-        String repo = "CapsilonAutomation";
+        String owner = "eugenp";
+        String repo = "learn-spring";
         String url = "https://api.github.com/repos/" + owner +"/" + repo +"/stats/contributors";
 
         //repos/:owner/:repo/stats/contributors
+        // (?<=("login":")).+(?=",)
 
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
@@ -39,22 +43,27 @@ public class HTTPComponents {
         System.out.println("Response Code : "
                 + response.getStatusLine().getStatusCode());
 
+        Scanner scanner = new Scanner(response.getEntity().getContent());
+        String text = scanner.nextLine();
+        scanner.close();
 
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(response.getEntity().getContent()));
+        String pattern = "(?<=(\"login\":\")).+?(?=\",)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
 
-        StringBuffer result = new StringBuffer();
-        String line = "";
-
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        while (m.find()) {
+                System.out.println(m.group(0));
         }
+
+
+
+
 
 
     }
 
 
-    public void sendRepoInvite() throws IOException {
+    public static void sendRepoInvite() throws IOException {
 
         String owner = "namellez";
         String repo = "CapsilonAutomation";
