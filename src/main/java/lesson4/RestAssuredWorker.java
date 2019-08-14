@@ -4,31 +4,40 @@ import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.HttpHeaders;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RestAssuredWorker {
 
-    public static void getListOfRepoUsers(){
+    public static List<String> getListOfRepoUsers(){
 
     String owner = "namellez";
     String repo = "CapsilonAutomation";
-    String url = "https://api.github.com/repos/" + owner +"/" + repo +"/stats/contributors";
 
-        // Specify the base URL to the RESTful web service
-        RestAssured.baseURI = "https://api.github.com/repos/" + owner +"/" + repo +"/stats/contributors";
+        RestAssured.baseURI = "https://api.github.com/repos/" + owner +"/" + repo + "/stats/contributors";
 
-        // Get the RequestSpecification of the request that you want to sent
-        // to the server. The server is specified by the BaseURI that we have
-        // specified in the above step.
         RequestSpecification httpRequest = RestAssured.given();
 
-        // Make a request to the server by specifying the method Type and the method URL.
-        // This will return the Response from the server. Store the response in a variable.
         Response response = httpRequest.request(Method.GET);
 
-        // Now let us print the body of the message to see what response
-        // we have recieved from the server
         String responseBody = response.getBody().asString();
-        System.out.println("Response Body is =>  " + responseBody);
+
+        String pattern = "(?<=(\"login\":\")).+?(?=\",)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(responseBody);
+
+        List<String> userList = new ArrayList<>();
+
+        while (m.find()) {
+            userList.add((m.group(0)));
+            System.out.println(m.group(0));
+        }
+
+        return userList;
 
     }
 
@@ -36,25 +45,19 @@ public class RestAssuredWorker {
 
         String owner = "namellez";
         String repo = "CapsilonAutomation";
-        String user = "dihnatsyeu";
-        String url = "https://api.github.com/repos/" + owner +"/" + repo +"/collaborators/" + user;
+        String user = "alexD1991";
 
-        // Specify the base URL to the RESTful web service
-        RestAssured.baseURI = "https://api.github.com/repos/" + owner +"/" + repo +"/collaborators/" + user;
+        RestAssured.baseURI = "https://api.github.com/repos/" + owner + "/" + repo + "/collaborators/" + user;
 
-        // Get the RequestSpecification of the request that you want to sent
-        // to the server. The server is specified by the BaseURI that we have
-        // specified in the above step.
         RequestSpecification httpRequest = RestAssured.given();
 
-        // Make a request to the server by specifying the method Type and the method URL.
-        // This will return the Response from the server. Store the response in a variable.
-        Response response = httpRequest.request(Method.PUT);
+        String encoding = Base64.getEncoder().encodeToString(("user:password").getBytes());     //fake creds here
 
-        // Now let us print the body of the message to see what response
-        // we have recieved from the server
-        String responseBody = response.getBody().asString();
-        System.out.println("Response Body is =>  " + responseBody);
+        Response response = httpRequest.given().header(HttpHeaders.AUTHORIZATION, "Basic " + encoding).request(Method.PUT);
+
+        //String responseBody = response.getBody().asString();
+
+        System.out.println("Response code: " + response.getStatusCode());
 
     }
 
