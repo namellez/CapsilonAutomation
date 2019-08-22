@@ -1,7 +1,7 @@
- T-601 capacity: 1255 tonnage: 1200 range:1100
- T-500 capacity: 1150 tonnage: 1000 range:1000
- T-600 capacity: 1255 tonnage: 1200 range:1100
- Boeing-737 capacity: 725 tonnage: 500 range:2000
- Boeing-939 capacity: 500 tonnage: 400 range:3000
- Concord capacity: 350 tonnage: 50 range:800
- Jetline capacity: 200 tonnage: 50 range:1200
+ T-601 capacity: 1255 tonnage: 1200 range: 1100
+ T-500 capacity: 1150 tonnage: 1000 range: 1000
+ T-600 capacity: 1255 tonnage: 1200 range: 1100
+ Boeing-737 capacity: 725 tonnage: 500 range: 2000
+ Boeing-939 capacity: 500 tonnage: 400 range: 3000
+ Concord capacity: 350 tonnage: 50 range: 800
+ Jetline capacity: 200 tonnage: 50 range: 1200
