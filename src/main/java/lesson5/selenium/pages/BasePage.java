@@ -14,7 +14,7 @@ public class BasePage {
     private static final int POLLING = 100;     //time between checks (ms) -> 50 checks before timeout
 
     protected WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

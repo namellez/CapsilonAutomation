@@ -17,7 +17,6 @@ public class BaseTest {
     public void beforeSuite() {
         System.setProperty("webdriver.chrome.driver",DRIVER_PATH);
         driver = new ChromeDriver();
-        System.out.println("Starting driver!!");
     }
 
     @AfterSuite
@@ -26,7 +25,6 @@ public class BaseTest {
             driver.close();
             driver.quit();
         }
-        System.out.println("Closing driver!!");
     }
 
     public WebDriver getDriver() {
