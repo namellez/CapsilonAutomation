@@ -1,14 +1,19 @@
 package lesson4;
 
+import static lesson4.ApacheWorker.getUserList;
+
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
 
-       ApacheWorker.getListOfRepoUsers();
-       ApacheWorker.inviteUser();
+       ApacheWorker.parseUserList(getUserList());
 
-       RestAssuredWorker.inviteUser();
-       RestAssuredWorker.getListOfRepoUsers();
+
+//       ApacheWorker.inviteUser();
+//       RestAssuredWorker.inviteUser();
+
+        RestAssuredWorker.parseUserList(RestAssuredWorker.getUserList());
     }
 
 }

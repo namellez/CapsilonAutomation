@@ -13,49 +13,45 @@ import java.util.regex.Pattern;
 
 public class RestAssuredWorker {
 
-    public static List<String> getListOfRepoUsers(){
+    private static final String OWNER = "namellez";
+    private static final String REPO = "CapsilonAutomation";
 
-    String owner = "namellez";
-    String repo = "CapsilonAutomation";
+    public static Response getUserList(){
 
-        RestAssured.baseURI = "https://api.github.com/repos/" + owner +"/" + repo + "/stats/contributors";
-
+        RestAssured.baseURI = "https://api.github.com/repos/" + OWNER +"/" + REPO + "/stats/contributors";
         RequestSpecification httpRequest = RestAssured.given();
+        return httpRequest.request(Method.GET);
+    }
 
-        Response response = httpRequest.request(Method.GET);
+
+    public static List<String> parseUserList(Response response){
 
         String responseBody = response.getBody().asString();
 
-        String pattern = "(?<=(\"login\":\")).+?(?=\",)";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(responseBody);
+        Matcher matcher = MatchMaker.getMatcher(responseBody);
 
         List<String> userList = new ArrayList<>();
 
-        while (m.find()) {
-            userList.add((m.group(0)));
-            System.out.println(m.group(0));
+        while (matcher.find()) {
+            userList.add((matcher.group(0)));
+            System.out.println(matcher.group(0));
         }
 
         return userList;
-
     }
+
 
     public static void inviteUser(){
 
-        String owner = "namellez";
-        String repo = "CapsilonAutomation";
-        String user = "alexD1991";
+        final String user = "alexD1991";
 
-        RestAssured.baseURI = "https://api.github.com/repos/" + owner + "/" + repo + "/collaborators/" + user;
+        RestAssured.baseURI = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/collaborators/" + user;
 
         RequestSpecification httpRequest = RestAssured.given();
 
         String encoding = Base64.getEncoder().encodeToString(("user:password").getBytes());     //fake creds here
 
         Response response = httpRequest.given().header(HttpHeaders.AUTHORIZATION, "Basic " + encoding).request(Method.PUT);
-
-        //String responseBody = response.getBody().asString();
 
         System.out.println("Response code: " + response.getStatusCode());
 

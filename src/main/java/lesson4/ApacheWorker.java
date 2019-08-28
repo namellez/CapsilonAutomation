@@ -15,30 +15,29 @@ import java.util.regex.Pattern;
 
 public class ApacheWorker {
 
-    public static List<String> getListOfRepoUsers() throws Exception {
+    private static HttpClient client = HttpClientBuilder.create().build();
+    private static final String OWNER = "namellez";
+    private static final String REPO = "CapsilonAutomation";
 
-        String owner = "namellez";
-        String repo = "CapsilonAutomation";
-        String url = "https://api.github.com/repos/" + owner + "/" + repo + "/stats/contributors";  //API: repos/:owner/:repo/stats/contributors
-
-        HttpClient client = HttpClientBuilder.create().build();
+    public static HttpResponse getUserList() throws Exception {
+        final String url = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/stats/contributors";  //API: repos/:owner/:repo/stats/contributors
         HttpGet request = new HttpGet(url);
+        return client.execute(request);
+    }
 
-        HttpResponse response = client.execute(request);
+    public static List<String> parseUserList(HttpResponse response) throws Exception{
 
         Scanner scanner = new Scanner(response.getEntity().getContent());
         String text = scanner.nextLine();
         scanner.close();
 
-        String pattern = "(?<=(\"login\":\")).+?(?=\",)";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(text);
+        Matcher matcher = MatchMaker.getMatcher(text);
 
         List<String> userList = new ArrayList<>();
 
-        while (m.find()) {
-            userList.add((m.group(0)));
-            System.out.println(m.group(0));
+        while (matcher.find()) {
+            userList.add((matcher.group(0)));
+            System.out.println(matcher.group(0));
         }
 
         return userList;
@@ -46,12 +45,9 @@ public class ApacheWorker {
 
     public static void inviteUser() throws IOException {
 
-        String owner = "namellez";
-        String repo = "CapsilonAutomation";
-        String user = "dihnatsyeu";
-        String url = "https://api.github.com/repos/" + owner + "/" + repo + "/collaborators/" + user;   //PUT /repos/:owner/:repo/collaborators/:username
+        final String user = "dihnatsyeu";
+        final String url = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/collaborators/" + user;   //PUT /repos/:owner/:repo/collaborators/:username
 
-        HttpClient client = HttpClientBuilder.create().build();
         HttpPut request = new HttpPut(url);
 
         String encoding = Base64.getEncoder().encodeToString(("user:password").getBytes());     //fake creds here
