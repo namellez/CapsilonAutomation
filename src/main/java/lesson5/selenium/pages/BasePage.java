@@ -10,8 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
-    private static final int TIMEOUT = 7;         // timeout (s)
-    private static final int POLLING = 100;     //time between checks (ms) -> 50 checks before timeout
+    private static final int TIMEOUT = 7;
+    private static final int POLLING = 100;
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -30,9 +30,16 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    protected void waitForElementToBeClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
 
     protected void waitForElementToDisappear(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    protected void waitForElementToDisappear(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     protected void waitForTextToDisappear(By locator, String text) {

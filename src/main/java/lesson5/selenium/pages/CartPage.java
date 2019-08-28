@@ -1,5 +1,6 @@
 package lesson5.selenium.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,39 +13,71 @@ public class CartPage extends BasePage {
     }
 
     @FindBy(xpath=".//input[@name='name']")
-    WebElement nameField;
+    private WebElement nameField;
 
     @FindBy(xpath=".//input[@name='phoneNumber']")
-    WebElement phoneField;
+    private WebElement phoneField;
 
     @FindBy(xpath=".//div[@class='pzz-cart__delivery pizza-sending']/a")
-    WebElement houseDropdown;
+    private WebElement houseDropdown;
 
-    @FindBy(xpath="//div[contains(@class, 'payment-cash-button')]")
-    WebElement paymentSelector;
+    @FindBy(xpath="//div[@class = 'ips__group payment-cash-button']")
+    private WebElement paymentSelector;
 
     @FindBy(xpath="//div[contains(@class, 'self-delivery-35-button')]")
-    WebElement timeSelector;
+    private WebElement timeSelector;
 
-    public CartPage inputOrderDetails() throws InterruptedException {
+    @FindBy(xpath="//input[@id='s2id_autogen4_search']")
+    private WebElement houseSearchBox;
+
+    @FindBy(xpath="//div[@id='s2id_home-number']//span[@class='select2-arrow']")
+    private WebElement houseDropdownArrow;
+
+    @FindBy(xpath="//span[@class='btn-next show-address-form']")
+    private WebElement orderDetailsBtn;
+
+
+    public CartPage goToOrderDetails() {
+        waitForElementToAppear(orderDetailsBtn);
+        orderDetailsBtn.click();
+        System.out.println("Went to order details");
+        return this;
+    }
+
+    public CartPage setPaymentMethod() {
         waitForElementToAppear(paymentSelector);
         paymentSelector.click();
-        System.out.println("123");
+        System.out.println("Set payment method");
+        return this;
+    }
 
+    public CartPage setDeliveryTime() {
         waitForElementToAppear(timeSelector);
         timeSelector.click();
-        System.out.println("234234");
+        System.out.println("Set delivery time");
+        return this;
+    }
 
+    public CartPage setName(String name) {
         waitForElementToAppear(nameField);
-        nameField.sendKeys("Stepan");
-        System.out.println("234234");
+        nameField.sendKeys(name);
+        System.out.println("Filled in name");
+        return this;
+    }
 
+    public CartPage setPhoneNumber(int number) {
         waitForElementToAppear(phoneField);
-        phoneField.sendKeys("666666");
-        System.out.println("234234");
+        phoneField.sendKeys(Integer.toString(number));
+        System.out.println("Filled in phone number");
+        return this;
+    }
 
-        new Select(houseDropdown).selectByVisibleText("25 ");
-
+    public CartPage setHouseNumber(int number) {
+        houseDropdownArrow.click();
+        waitForElementToAppear(houseSearchBox);
+        houseSearchBox.sendKeys(Integer.toString(number));
+        houseSearchBox.sendKeys(Keys.RETURN);
+        System.out.println("Selected house number");
         return this;
     }
 
